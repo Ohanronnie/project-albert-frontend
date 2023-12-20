@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <script src="/eruda.js"></script>
+  <script>
+    if (window.location.port != 5173) {
+      location = "http://localhost:5173/product/watermark";
+    } else {
+      eruda.init();
+    }
+  </script>
+  <body>
+    <div
+      id="root"
+      class="bg-base-100 dark:text-white"
+      style="height: 100vmax"
+    ></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
