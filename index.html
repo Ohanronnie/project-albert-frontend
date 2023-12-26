@@ -10,7 +10,7 @@
   <script>
     if (window.location.port == 7700) {
       location = "http://localhost:5173/product/watermark";
-    } else {
+    } else if(window.location.port == 5173){
       eruda.init();
     }
   </script>
