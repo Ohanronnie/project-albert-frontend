@@ -75,7 +75,7 @@ export default function Payment() {
     <>
       {!loading ? (
         <>
-          {!hasPaid && <Navigate to="/home" replace />}
+          {hasPaid && <Navigate to="/home" replace />}
           <PaymentDiv />
         </>
       ) : (
