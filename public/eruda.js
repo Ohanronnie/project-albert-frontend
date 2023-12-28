@@ -9,10 +9,10 @@
   "object" == typeof exports && "object" == typeof module
     ? (module.exports = t())
     : "function" == typeof define && define.amd
-    ? define([], t)
-    : "object" == typeof exports
-    ? (exports.eruda = t())
-    : (e.eruda = t());
+      ? define([], t)
+      : "object" == typeof exports
+        ? (exports.eruda = t())
+        : (e.eruda = t());
 })(self, function () {
   return (function () {
     var __webpack_modules__ = {
@@ -1410,47 +1410,47 @@
                         _e()(i)
                           ? (e[o] = this.formatEl(i))
                           : Me()(i)
-                          ? (e[o] = this.formatFn(i))
-                          : At()(i)
-                          ? (e[o] = '<span class="'
-                              .concat(t("regexp"), '">')
-                              .concat(p()(m()(i)), "</span>"))
-                          : de()(i)
-                          ? (e[o] = this.formatPreview(i))
-                          : Te()(i)
-                          ? (e[o] = '<span class="'.concat(
-                              t("undefined"),
-                              '">undefined</span>',
-                            ))
-                          : Ee()(i)
-                          ? (e[o] = '<span class="'.concat(
-                              t("null"),
-                              '">null</span>',
-                            ))
-                          : $()(i)
-                          ? (e[o] = '<span class="'
-                              .concat(t("number"), '">')
-                              .concat(m()(i), "</span>"))
-                          : "bigint" == typeof i
-                          ? (e[o] = '<span class="'
-                              .concat(t("number"), '">')
-                              .concat(m()(i), "n</span>"))
-                          : yt()(i)
-                          ? (e[o] = '<span class="'
-                              .concat(t("boolean"), '">')
-                              .concat(m()(i), "</span>"))
-                          : _t()(i)
-                          ? (e[o] = '<span class="'
-                              .concat(t("symbol"), '">')
-                              .concat(p()(m()(i)), "</span>"))
-                          : ((i = m()(i)),
-                            (0 === o && n) || (i = p()(i)),
-                            i.length > 5e3 &&
-                              (i = N()(i, 5e3, {
-                                separator: " ",
-                                ellipsis: "…",
-                              })),
-                            (e[o] = i));
+                            ? (e[o] = this.formatFn(i))
+                            : At()(i)
+                              ? (e[o] = '<span class="'
+                                  .concat(t("regexp"), '">')
+                                  .concat(p()(m()(i)), "</span>"))
+                              : de()(i)
+                                ? (e[o] = this.formatPreview(i))
+                                : Te()(i)
+                                  ? (e[o] = '<span class="'.concat(
+                                      t("undefined"),
+                                      '">undefined</span>',
+                                    ))
+                                  : Ee()(i)
+                                    ? (e[o] = '<span class="'.concat(
+                                        t("null"),
+                                        '">null</span>',
+                                      ))
+                                    : $()(i)
+                                      ? (e[o] = '<span class="'
+                                          .concat(t("number"), '">')
+                                          .concat(m()(i), "</span>"))
+                                      : "bigint" == typeof i
+                                        ? (e[o] = '<span class="'
+                                            .concat(t("number"), '">')
+                                            .concat(m()(i), "n</span>"))
+                                        : yt()(i)
+                                          ? (e[o] = '<span class="'
+                                              .concat(t("boolean"), '">')
+                                              .concat(m()(i), "</span>"))
+                                          : _t()(i)
+                                            ? (e[o] = '<span class="'
+                                                .concat(t("symbol"), '">')
+                                                .concat(p()(m()(i)), "</span>"))
+                                            : ((i = m()(i)),
+                                              (0 === o && n) || (i = p()(i)),
+                                              i.length > 5e3 &&
+                                                (i = N()(i, 5e3, {
+                                                  separator: " ",
+                                                  ellipsis: "…",
+                                                })),
+                                              (e[o] = i));
                       }
                       return e.join(" ");
                     },
@@ -1470,12 +1470,12 @@
                       return de()(e)
                         ? "{…}"
                         : ge()(e)
-                        ? vt()(
-                            '<div class="'
-                              .concat(t("preview"), '">')
-                              .concat(ee(e), "</div>"),
-                          )
-                        : m()(e);
+                          ? vt()(
+                              '<div class="'
+                                .concat(t("preview"), '">')
+                                .concat(ee(e), "</div>"),
+                            )
+                          : m()(e);
                     },
                   },
                   {
@@ -1496,8 +1496,8 @@
                           ? ((i = "(".concat(e.length, ")")),
                             r && (i = "Array".concat(i)))
                           : "RegExp" === i
-                          ? (i = m()(e))
-                          : _e()(e) && (i = this.formatElName(e)),
+                            ? (i = m()(e))
+                            : _e()(e) && (i = this.formatElName(e)),
                         '<div class="'
                           .concat(n("preview"), '" data-id="')
                           .concat(o, '">') +
@@ -2419,14 +2419,14 @@
                           a < 1e3
                             ? ((o = 200), (t = 400))
                             : a < 5e3
-                            ? ((o = 500), (t = 800))
-                            : a < 1e4
-                            ? ((o = 800), (t = 1e3))
-                            : a < 25e3
-                            ? ((o = 1e3), (t = 1200))
-                            : a < 5e4
-                            ? ((o = 1500), (t = 1500))
-                            : ((o = 2e3), (t = 2500)),
+                              ? ((o = 500), (t = 800))
+                              : a < 1e4
+                                ? ((o = 800), (t = 1e3))
+                                : a < 25e3
+                                  ? ((o = 1e3), (t = 1200))
+                                  : a < 5e4
+                                    ? ((o = 1500), (t = 1500))
+                                    : ((o = 2e3), (t = 2500)),
                             o > a && ((o = a), (r = !0));
                           for (var s = 0; s < o; s++) {
                             var c = i(n.shift(), 3),
@@ -2621,8 +2621,8 @@
                           m > f
                             ? (v += N)
                             : m + N > d
-                            ? S.appendChild(T)
-                            : m < d && (p += N),
+                              ? S.appendChild(T)
+                              : m < d && (p += N),
                             (m += N);
                         }
                         for (
@@ -3766,17 +3766,17 @@
                     (0, i.Z)(e, t, n[t]);
                   })
                 : Object.getOwnPropertyDescriptors
-                ? Object.defineProperties(
-                    e,
-                    Object.getOwnPropertyDescriptors(n),
-                  )
-                : se(Object(n)).forEach(function (t) {
-                    Object.defineProperty(
+                  ? Object.defineProperties(
                       e,
-                      t,
-                      Object.getOwnPropertyDescriptor(n, t),
-                    );
-                  });
+                      Object.getOwnPropertyDescriptors(n),
+                    )
+                  : se(Object(n)).forEach(function (t) {
+                      Object.defineProperty(
+                        e,
+                        t,
+                        Object.getOwnPropertyDescriptor(n, t),
+                      );
+                    });
             }
             return e;
           }
@@ -5600,10 +5600,10 @@
                         "symbol" === o
                           ? h
                           : "unenumerable" === o
-                          ? d
-                          : "virtual" === o
-                          ? p
-                          : u),
+                            ? d
+                            : "virtual" === o
+                              ? p
+                              : u),
                         a || ee()(r);
                       for (var s = 0, l = r.length; s < l; s++) {
                         var f = U()(r[s]),
@@ -9154,8 +9154,8 @@
                       T()(e)
                         ? (t.text(e), n.setOption("filter", Ne()(e)))
                         : _t()(e)
-                        ? (t.text(z()(e)), n.setOption("filter", e))
-                        : yt()(e) && (t.text("ƒ"), n.setOption("filter", e));
+                          ? (t.text(z()(e)), n.setOption("filter", e))
+                          : yt()(e) && (t.text("ƒ"), n.setOption("filter", e));
                     },
                   },
                   {
@@ -9692,17 +9692,17 @@
                     (0, u.Z)(e, t, n[t]);
                   })
                 : Object.getOwnPropertyDescriptors
-                ? Object.defineProperties(
-                    e,
-                    Object.getOwnPropertyDescriptors(n),
-                  )
-                : on(Object(n)).forEach(function (t) {
-                    Object.defineProperty(
+                  ? Object.defineProperties(
                       e,
-                      t,
-                      Object.getOwnPropertyDescriptor(n, t),
-                    );
-                  });
+                      Object.getOwnPropertyDescriptors(n),
+                    )
+                  : on(Object(n)).forEach(function (t) {
+                      Object.defineProperty(
+                        e,
+                        t,
+                        Object.getOwnPropertyDescriptor(n, t),
+                      );
+                    });
             }
             return e;
           }
@@ -13306,8 +13306,9 @@
                                 2 & i[0]
                                   ? o.return
                                   : i[0]
-                                  ? o.throw || ((r = o.return) && r.call(o), 0)
-                                  : o.next) &&
+                                    ? o.throw ||
+                                      ((r = o.return) && r.call(o), 0)
+                                    : o.next) &&
                               !(r = r.call(o, i[1])).done)
                           )
                             return r;
@@ -14404,14 +14405,14 @@
                   "attributes" === e.type
                     ? this.emit("attributes", e.target, e.attributeName)
                     : "childList" === e.type
-                    ? this.emit(
-                        "childList",
-                        e.target,
-                        e.addedNodes,
-                        e.removedNodes,
-                      )
-                    : "characterData" === e.type &&
-                      this.emit("characterData", e.target);
+                      ? this.emit(
+                          "childList",
+                          e.target,
+                          e.addedNodes,
+                          e.removedNodes,
+                        )
+                      : "characterData" === e.type &&
+                        this.emit("characterData", e.target);
                 }),
                 t
               );
@@ -14588,29 +14589,29 @@
             return "undefined" === c
               ? s
               : "string" === c || "boolean" === c || "null" === l
-              ? ((s.value = e), s)
-              : ((s.description = j(e, a)),
-                "number" === c
-                  ? ((s.value = e), s)
-                  : "symbol" === c
-                  ? ((s.objectId = S(e, a)), s)
-                  : ((s.className =
-                      "function" === c
-                        ? "Function"
-                        : "array" === l
-                        ? "Array"
-                        : "map" === l
-                        ? "Map"
-                        : "set" === l
-                        ? "Set"
-                        : "regexp" === l
-                        ? "RegExp"
-                        : "error" === l
-                        ? e.name
-                        : h.default(e, !1)),
-                    r && (s.preview = N(e, a)),
-                    (s.objectId = S(e, a)),
-                    s));
+                ? ((s.value = e), s)
+                : ((s.description = j(e, a)),
+                  "number" === c
+                    ? ((s.value = e), s)
+                    : "symbol" === c
+                      ? ((s.objectId = S(e, a)), s)
+                      : ((s.className =
+                          "function" === c
+                            ? "Function"
+                            : "array" === l
+                              ? "Array"
+                              : "map" === l
+                                ? "Map"
+                                : "set" === l
+                                  ? "Set"
+                                  : "regexp" === l
+                                    ? "RegExp"
+                                    : "error" === l
+                                      ? e.name
+                                      : h.default(e, !1)),
+                        r && (s.preview = N(e, a)),
+                        (s.objectId = S(e, a)),
+                        s));
           }
           function O(e) {
             return _.get(e);
@@ -14759,12 +14760,12 @@
                   ? "null" === i
                     ? "null"
                     : "array" === i
-                    ? "Array(" + t.length + ")"
-                    : "map" === i
-                    ? "Map(" + t.size + ")"
-                    : "set" === i
-                    ? "Set(" + t.size + ")"
-                    : h.default(t, !1)
+                      ? "Array(" + t.length + ")"
+                      : "map" === i
+                        ? "Map(" + t.size + ")"
+                        : "set" === i
+                          ? "Set(" + t.size + ")"
+                          : h.default(t, !1)
                   : r.default(t)),
               (n.value = o),
               n
@@ -14778,28 +14779,28 @@
             return "string" === o
               ? e
               : "number" === o || "symbol" === o
-              ? r.default(e)
-              : "function" === o
-              ? v.default(e)
-              : "array" === i
-              ? "Array(" + e.length + ")"
-              : "map" === i
-              ? "Map(" + t.size + ")"
-              : "set" === i
-              ? "Set(" + t.size + ")"
-              : "regexp" === i
-              ? r.default(e)
-              : "error" === i
-              ? e.stack
-              : "internal#entry" === i
-              ? e.name
-                ? '{"' +
-                  r.default(e.name) +
-                  '" => "' +
-                  r.default(e.value) +
-                  '"}'
-                : '"' + r.default(e.value) + '"'
-              : h.default(e, !1);
+                ? r.default(e)
+                : "function" === o
+                  ? v.default(e)
+                  : "array" === i
+                    ? "Array(" + e.length + ")"
+                    : "map" === i
+                      ? "Map(" + t.size + ")"
+                      : "set" === i
+                        ? "Set(" + t.size + ")"
+                        : "regexp" === i
+                          ? r.default(e)
+                          : "error" === i
+                            ? e.stack
+                            : "internal#entry" === i
+                              ? e.name
+                                ? '{"' +
+                                  r.default(e.name) +
+                                  '" => "' +
+                                  r.default(e.value) +
+                                  '"}'
+                                : '"' + r.default(e.value) + '"'
+                              : h.default(e, !1);
           }
           function R(e) {
             var t = typeof e,
@@ -15185,8 +15186,9 @@
                                 2 & i[0]
                                   ? o.return
                                   : i[0]
-                                  ? o.throw || ((r = o.return) && r.call(o), 0)
-                                  : o.next) &&
+                                    ? o.throw ||
+                                      ((r = o.return) && r.call(o), 0)
+                                    : o.next) &&
                               !(r = r.call(o, i[1])).done)
                           )
                             return r;
@@ -16834,10 +16836,10 @@
                 ? (l = s.stringify(l)) &&
                   (c += c.indexOf("?") > -1 ? "&" + l : "?" + l)
                 : "application/x-www-form-urlencoded" === e.contentType
-                ? a(l) && (l = s.stringify(l))
-                : "application/json" === e.contentType &&
-                  a(l) &&
-                  (l = JSON.stringify(l)),
+                  ? a(l) && (l = s.stringify(l))
+                  : "application/json" === e.contentType &&
+                    a(l) &&
+                    (l = JSON.stringify(l)),
               v.open(o, c, !0),
               v.setRequestHeader("Content-Type", e.contentType),
               h > 0 &&
@@ -17094,10 +17096,10 @@
                   return t(e);
                 })
               : o(e) && !r(e)
-              ? a(e, function (e) {
-                  return t(e);
-                })
-              : e;
+                ? a(e, function (e) {
+                    return t(e);
+                  })
+                : e;
           }),
             (e.exports = t);
         },
@@ -17359,8 +17361,8 @@
                 Z: f
                   ? "GMT"
                   : a
-                  ? "UTC"
-                  : (i(e).match(l) || [""]).pop().replace(d, ""),
+                    ? "UTC"
+                    : (i(e).match(l) || [""]).pop().replace(d, ""),
                 o:
                   (A > 0 ? "-" : "+") +
                   s(100 * Math.floor(Math.abs(A) / 60) + (Math.abs(A) % 60), 4),
@@ -17906,10 +17908,10 @@
               return t || null === t
                 ? t
                 : r(e.constructor)
-                ? e.constructor.prototype
-                : e instanceof a
-                ? a.prototype
-                : void 0;
+                  ? e.constructor.prototype
+                  : e instanceof a
+                    ? a.prototype
+                    : void 0;
             }
           }),
             (e.exports = t);
@@ -17951,8 +17953,8 @@
                     (i(a, "#")
                       ? (n = a.slice(1))
                       : i(a, ".")
-                      ? o.push(a.slice(1))
-                      : (t = a));
+                        ? o.push(a.slice(1))
+                        : (t = a));
                 return { tagName: t, id: n, classes: o };
               })(e),
               h = f.tagName,
@@ -17971,8 +17973,8 @@
                 r(e)
                   ? m.setAttribute(t, e)
                   : l(e) && i(t, "on")
-                  ? m.addEventListener(t.slice(2), e, !1)
-                  : "style" === t && s(m, e);
+                    ? m.addEventListener(t.slice(2), e, !1)
+                    : "style" === t && s(m, e);
               }),
               m
             );
@@ -18052,8 +18054,8 @@
                       n[r].embed.indexOf(o) > -1))
                   ? (u.push(o), e)
                   : t && o == r
-                  ? (u.pop(), e)
-                  : "";
+                    ? (u.pop(), e)
+                    : "";
               })),
               o(n, function (t, n) {
                 var o = s[t.style] ? ' style="'.concat(s[t.style], '"') : "";
@@ -18150,10 +18152,10 @@
                   6 * o < 1
                     ? l + 6 * (t - l) * o
                     : 2 * o < 1
-                    ? t
-                    : 3 * o < 2
-                    ? l + (t - l) * (2 / 3 - o) * 6
-                    : l),
+                      ? t
+                      : 3 * o < 2
+                        ? l + (t - l) * (2 / 3 - o) * 6
+                        : l),
                 (c[u] = n(255 * r));
             return c;
           };
@@ -18217,14 +18219,14 @@
                       return (n += e(t));
                     })
                   : s(t)
-                  ? (n = t)
-                  : ((n += "<".concat(t.tag)),
-                    a(t.attrs, function (e, t) {
-                      return (n += " ".concat(t, '="').concat(u(e), '"'));
-                    }),
-                    (n += ">"),
-                    t.content && (n += e(t.content)),
-                    (n += "</".concat(t.tag, ">"))),
+                    ? (n = t)
+                    : ((n += "<".concat(t.tag)),
+                      a(t.attrs, function (e, t) {
+                        return (n += " ".concat(t, '="').concat(u(e), '"'));
+                      }),
+                      (n += ">"),
+                      t.content && (n += e(t.content)),
+                      (n += "</".concat(t.tag, ">"))),
                 n
               );
             },
@@ -18988,12 +18990,12 @@
             "object" == typeof process && process.nextTick
               ? process.nextTick
               : "function" == typeof setImmediate
-              ? function (e) {
-                  setImmediate(n(e));
-                }
-              : function (e) {
-                  setTimeout(n(e), 0);
-                }),
+                ? function (e) {
+                    setImmediate(n(e));
+                  }
+                : function (e) {
+                    setTimeout(n(e), 0);
+                  }),
             (e.exports = t);
         },
         1214: function (e, t) {
@@ -19275,8 +19277,8 @@
                     i(t[o])
                       ? (t[o] = r)
                       : a(t[o])
-                      ? t[o].push(r)
-                      : (t[o] = [t[o], r]);
+                        ? t[o].push(r)
+                        : (t[o] = [t[o], r]);
                 }),
                 t
               );
@@ -19287,10 +19289,10 @@
                   return u(e) && c(e)
                     ? ""
                     : a(e)
-                    ? t.stringify(e, o)
-                    : (n ? encodeURIComponent(n) : encodeURIComponent(o)) +
-                      "=" +
-                      encodeURIComponent(e);
+                      ? t.stringify(e, o)
+                      : (n ? encodeURIComponent(n) : encodeURIComponent(o)) +
+                        "=" +
+                        encodeURIComponent(e);
                 }),
                 function (e) {
                   return e.length > 0;
@@ -19475,10 +19477,10 @@
                   u === l
                     ? 0
                     : a === u
-                    ? (s - c) / d
-                    : s === u
-                    ? 2 + (c - a) / d
-                    : 4 + (a - s) / d),
+                      ? (s - c) / d
+                      : s === u
+                        ? 2 + (c - a) / d
+                        : 4 + (a - s) / d),
               360,
             )) < 0 && (t += 360);
             var f = (l + u) / 2;
@@ -19566,10 +19568,10 @@
             return null == e
               ? c
               : o(e)
-              ? a(e, t, n)
-              : r(e) && !i(e)
-              ? s(e)
-              : l(e);
+                ? a(e, t, n)
+                : r(e) && !i(e)
+                  ? s(e)
+                  : l(e);
           }),
             (e.exports = t);
         },
@@ -19956,8 +19958,8 @@
               return "Infinity" === a
                 ? Number.POSITIVE_INFINITY
                 : "-Infinity" === a
-                ? Number.NEGATIVE_INFINITY
-                : NaN;
+                  ? Number.NEGATIVE_INFINITY
+                  : NaN;
             if ("Undefined" !== r) {
               var f, h, p;
               if ("Function" === r)
@@ -20393,8 +20395,8 @@
               0 == (4294965248 & e)
                 ? ((t = 1), (n = 192))
                 : 0 == (4294901760 & e)
-                ? ((t = 2), (n = 224))
-                : 0 == (4292870144 & e) && ((t = 3), (n = 240)),
+                  ? ((t = 2), (n = 224))
+                  : 0 == (4292870144 & e) && ((t = 3), (n = 240)),
                 o += f((e >> (6 * t)) + n);
               t > 0;
 
@@ -21079,12 +21081,12 @@
             return (0, A.default)(e)
               ? e
               : e.a
-              ? "rgba("
-                  .concat(e.r, ", ")
-                  .concat(e.g, ", ")
-                  .concat(e.b, ", ")
-                  .concat(e.a, ")")
-              : "rgb(".concat(e.r, ", ").concat(e.g, ", ").concat(e.b, ")");
+                ? "rgba("
+                    .concat(e.r, ", ")
+                    .concat(e.g, ", ")
+                    .concat(e.b, ", ")
+                    .concat(e.a, ")")
+                : "rgb(".concat(e.r, ", ").concat(e.g, ", ").concat(e.b, ")");
           }
           function O(e, t, n) {
             void 0 === n && (n = !1);
@@ -21217,10 +21219,10 @@
                 c === s
                   ? 0
                   : o === s
-                  ? (((1 / 6) * (r - i)) / l + 1) % 1
-                  : r === s
-                  ? ((1 / 6) * (i - o)) / l + 1 / 3
-                  : ((1 / 6) * (o - r)) / l + 2 / 3,
+                    ? (((1 / 6) * (r - i)) / l + 1) % 1
+                    : r === s
+                      ? ((1 / 6) * (i - o)) / l + 1 / 3
+                      : ((1 / 6) * (o - r)) / l + 2 / 3,
                 0 === d || 1 === d ? 0 : d <= 0.5 ? l / u : l / (2 - u),
                 d,
                 a,
@@ -21270,13 +21272,13 @@
                   ? (n = (Math.pow(t, s) - Math.pow(e, c)) * h) < y
                     ? 0
                     : n < m
-                    ? n - n * g * b
-                    : n - b
+                      ? n - n * g * b
+                      : n - b
                   : (n = (Math.pow(t, l) - Math.pow(e, u)) * p) > -y
-                  ? 0
-                  : n > -m
-                  ? n - n * g * b
-                  : n + b)
+                    ? 0
+                    : n > -m
+                      ? n - n * g * b
+                      : n + b)
             );
           }
           (t.luminanceAPCA = w),
@@ -21938,8 +21940,8 @@
               return "rgb" === t || "hsl" === t
                 ? m(v(e), t)
                 : (0, s.default)(e, "FF")
-                ? e.substr(0, 7)
-                : e;
+                  ? e.substr(0, 7)
+                  : e;
             }),
             (t.drawPath = function (e, t, n, o, r, i, a) {
               e.save();
@@ -22780,16 +22782,16 @@
               return t[n]
                 ? t[n]
                 : t.changedTouches
-                ? t.changedTouches[0][n]
-                : 0;
+                  ? t.changedTouches[0][n]
+                  : 0;
             }),
             (t.eventPage = function (e, t) {
               var n = "x" === e ? "pageX" : "pageY";
               return t[n]
                 ? t[n]
                 : t.changedTouches
-                ? t.changedTouches[0][n]
-                : 0;
+                  ? t.changedTouches[0][n]
+                  : 0;
             }),
             (t.measuredScrollbarWidth = function () {
               if ((0, c.default)(p)) return p;
@@ -23199,8 +23201,8 @@
               return t[n]
                 ? t[n]
                 : t.changedTouches
-                ? t.changedTouches[0][n]
-                : 0;
+                  ? t.changedTouches[0][n]
+                  : 0;
             }),
             (t.measuredScrollbarWidth = function () {
               if ((0, c.default)(p)) return p;
@@ -24019,9 +24021,9 @@
                 "Map" === n || "Set" === n
                   ? Array.from(e)
                   : "Arguments" === n ||
-                    /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-                  ? (0, o.Z)(e, t)
-                  : void 0
+                      /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
+                    ? (0, o.Z)(e, t)
+                    : void 0
               );
             }
           }

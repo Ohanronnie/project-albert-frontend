@@ -1,5 +1,7 @@
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import { axios } from "../utils/axios.js";
+import { useState, useEffect } from "react";
 const NeedPayment = () => {
   return (
     <>
@@ -38,11 +40,13 @@ const ProductCard = ({ title, body, badge, path }) => {
           {title} <span className="badge badge-outline">{badge}</span>
         </h2>
         <p className="text-sm capitalize">{body}</p>
-        <div className="card-actions justify-end">
-          <Link to={`/product/${path}`}>
-            <button className="btn btn-primary">Try It Out</button>
-          </Link>
-        </div>
+        {!badge.match(/soon/i) && (
+          <div className="card-actions justify-end">
+            <Link to={`/product/${path}`}>
+              <button className="btn btn-primary">{"Try It Out"}</button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -60,13 +64,13 @@ const Paid = () => {
             path="watermark"
           />
           <ProductCard
-            title="Helo"
-            body="Lorem Ipsun Dolor Sit Amet"
+            title="Content Manager"
+            body="Help you manage your social media with AI"
             badge="Coming Soon"
           />
           <ProductCard
-            title="Helo"
-            body="Lorem Ipsun Dolor Sit Amet"
+            title="Content Scheduling"
+            body="Schedule post to social media"
             badge="Coming Soon"
           />
         </div>
@@ -76,13 +80,33 @@ const Paid = () => {
 };
 
 export default function Home() {
+  const [hasPaid, setHasPaid] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [daysRemain, setDaysRemain] = useState(0);
+  useEffect(() => {
+    axios
+      .post("/user")
+      .then((response) => {
+        const data = response.data;
+        if (data.payment_required && !data.free_trial_days) {
+          setHasPaid(false);
+        } else if (!data.payment_required) {
+          setHasPaid(true);
+        }
+      })
+      .catch((error) => {
+        setHasPaid(false);
+      })
+      .finally((e) => setLoading(false));
+  }, []);
   return (
     <>
       <nav>
         <Header />
       </nav>
       <section className="bg-base-100">
-        <Paid />
+        {!loading && !hasPaid && <NeedPayment />}
+        {!loading && hasPaid && <Paid />}
       </section>
     </>
   );

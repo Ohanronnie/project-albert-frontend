@@ -9,6 +9,7 @@ import Register from "./routes/Register";
 import Login from "./routes/Login";
 import Home from "./routes/Home";
 import Watermark from "./routes/Watermark";
+import Payment from "./routes/Payment";
 import { axios } from "./utils/axios.js";
 import { useState, useEffect } from "react";
 const PrivateRoute = () => {
@@ -32,7 +33,31 @@ const PrivateRoute = () => {
     return <Navigate to="/login" replace />;
   }
 };
-
+const PaidRoute = () => {
+  const [hasPaid, setHasPaid] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .post("/user")
+      .then((response) => {
+        const data = response.data;
+        if (data.payment_required && !data.free_trial_days) {
+          setHasPaid(false);
+        } else if (!data.payment_required) {
+          setHasPaid(true);
+        }
+      })
+      .catch((error) => {
+        setHasPaid(false);
+      })
+      .finally((e) => setLoading(false));
+  }, []);
+  if (!loading) {
+    if (hasPaid) return <Outlet />;
+    return <Navigate to="/home" replace />;
+  }
+};
 function App() {
   const router = createBrowserRouter([
     {
@@ -58,12 +83,28 @@ function App() {
       ],
     },
     {
+      path: "/payment/pay",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "",
+          element: <Payment />,
+        },
+      ],
+    },
+    {
       path: "/product/watermark",
       element: <PrivateRoute />,
       children: [
         {
           path: "",
-          element: <Watermark />,
+          element: <PaidRoute />,
+          children: [
+            {
+              path: "",
+              element: <Watermark />,
+            },
+          ],
         },
       ],
     },
