@@ -3,6 +3,7 @@ import {
   RouterProvider,
   Navigate,
   Outlet,
+  useNavigate,
 } from "react-router-dom";
 import Landing from "./routes/Landing";
 import Register from "./routes/Register";
