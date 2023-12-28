@@ -11,7 +11,7 @@ export default function Payment() {
       .post("/user")
       .then((response) => {
         const data = response.data;
-        if (data.payment_required && !data.free_trial_days) {
+        if (data.payment_required) {
           setHasPaid(false);
         } else if (!data.payment_required) {
           setHasPaid(true);
