@@ -15,6 +15,7 @@ export default function Payment() {
           setHasPaid(false);
         } else if (!data.payment_required) {
           setHasPaid(true);
+          navigate("/home");
         }
       })
       .catch((error) => {
@@ -75,7 +76,7 @@ export default function Payment() {
     <>
       {!loading ? (
         <>
-          {hasPaid && <Navigate to="/home" replace />}
+          {/*hasPaid && <Navigate to="/home" replace/>*/}
           <PaymentDiv />
         </>
       ) : (
