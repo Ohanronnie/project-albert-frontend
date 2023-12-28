@@ -39,7 +39,9 @@ export default function Payment() {
             <h1 className="mt-4 px-4 text-3xl font-bold tracking-tight sm:text-5xl">
               Confirm to pay
             </h1>
-            <p className="mt-6 text-base leading-7">You're about to pay $20</p>
+            <p className="mt-6 text-base leading-7">
+              You're about to pay ₦3000
+            </p>
             <div className="mt-10 w-full flex items-center justify-center gap-x-6">
               <button
                 className="btn bg-base-100"

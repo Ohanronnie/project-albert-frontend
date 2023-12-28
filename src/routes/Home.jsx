@@ -15,9 +15,9 @@ const NeedPayment = () => {
             Sorry, you have to subscribe before you can use this tool.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link to="/home">
+            <Link to="/payment/pay">
               <button className="btn w-52 bg-base-100">
-                Subscribe For $20 only
+                Subscribe For ₦3000 only
               </button>
             </Link>
           </div>
