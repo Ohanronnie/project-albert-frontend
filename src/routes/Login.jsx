@@ -23,7 +23,7 @@ export default function Register() {
         navigate("/home");
       })
       .catch((error) => {
-console.log(response);
+console.log(error);
         let response = error?.response?.data?.message
           .toLowerCase()
           .replaceAll('"', "");
