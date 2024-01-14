@@ -63,7 +63,7 @@ const Paid = () => {
             badge="NEW"
             path="watermark"
           />
-          <ProductCard
+{/*          <ProductCard
             title="Content Manager"
             body="Help you manage your social media with AI"
             badge="Coming Soon"
@@ -72,7 +72,7 @@ const Paid = () => {
             title="Content Scheduling"
             body="Schedule post to social media"
             badge="Coming Soon"
-          />
+          />*/}
         </div>
       </main>
     </>
