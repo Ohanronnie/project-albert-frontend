@@ -23,7 +23,7 @@ export default function Header({ landing }) {
             <ul
               tabIndex={0}
               className={`menu menu-sm ${
-                landing && "hidden"
+                true && "hidden"
               } dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52`}
             >
               <li>
