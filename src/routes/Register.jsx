@@ -44,8 +44,8 @@ export default function Register() {
   };
   return (
     <>
-      <div className="herro flex items-center justify-center min-h-screen min-w-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="herro flex items-center justify-center w-full min-h-screen min-w-screen bg-base-200">
+        <div className="hero-content w-full flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl font-bold">Create Your Itools Account</h1>
             <p className="py-1"></p>
