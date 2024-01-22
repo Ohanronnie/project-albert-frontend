@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { axios } from "../utils/axios.js";
 import { useState, useEffect } from "react";
+import Vector from '../assets/youtube-4740743_1280.jpg'
 const NeedPayment = () => {
   return (
     <>
@@ -31,7 +32,7 @@ const ProductCard = ({ title, body, badge, path }) => {
     <div className="card w-full border-solid border-[1px] card-compact mb-4 bg-base-200 shadow-xl">
       <figure>
         <img
-          src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+          src={Vector}
           alt=""
         />
       </figure>

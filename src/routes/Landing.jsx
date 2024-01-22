@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 const advantages = [
   {
-    title: "Monetization Freedom",
+    title: "Monetizatio Freedom",
     body: "Unlock unlimited earning potential by monetizing videos without copyright restrictions.",
   },
   {
@@ -65,14 +65,14 @@ export default function Landing() {
       </nav>
       <section className="mt-10 px-6">
         <div className="">
-          <h1 className="font-semibold mb-4 dark:text-white leading-[1.3]  text-4xl text-center">
+          <h1 className="font-semibold mb-4 dark:text-white leading-[1.3] md:leading-[1.5] md:text-5xl text-4xl text-center">
             Introducing a New Era of Social Media Manager{" "}
           </h1>
           <h4 className="capitalize text-center dark:text-white text-md">
             Manage your social media space effectively with AI
           </h4>
           <Link to="/register">
-            <button className="btn mt-6 light:text-white light:bg-black dark:text-black text-sm rounded-full btn-block capitalize bg-white">
+            <button className="btn mt-6 md: light:text-white light:bg-black dark:text-black text-sm rounded-full btn-block capitalize bg-white">
               Start for free <ArrowRightIcon className="h-5 w-5" />
             </button>
           </Link>

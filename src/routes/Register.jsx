@@ -44,7 +44,7 @@ export default function Register() {
   };
   return (
     <>
-      <div className="herro min-h-screen min-w-screen bg-base-200">
+      <div className="herro flex items-center justify-center min-h-screen min-w-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl font-bold">Create Your Itools Account</h1>
@@ -102,7 +102,7 @@ export default function Register() {
                 <hr className="w-[45%]" />
               </div>
               <Link to="/login">
-                <button className="btn btn-block rounded-full"> Sign In</button>
+                <button className="btn btn-block rounded-full"> Login </button>
               </Link>
             </form>
           </div>

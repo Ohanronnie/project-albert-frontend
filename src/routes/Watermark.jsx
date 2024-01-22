@@ -83,15 +83,15 @@ export default function Watermark() {
         <Header />
       </nav>
       <section className="px-4 py-4">
-        <h1>Watermark Adder</h1>
+        <h1 className='md:text-2xl'>Watermark Adder</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Video</span>
+              <span className="label-text text-lg">Video</span>
             </label>
             <input
               type="file"
-              className="file-input h-8 file-input-bordered w-full max-w-xs"
+              className="file-input md:h-12 h-8 file-input-bordered w-full"
               accept="video/*"
               name="video"
               onChange={handleFileChange}
@@ -100,7 +100,7 @@ export default function Watermark() {
           </div>
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text">Video Preview</span>
+              <span className="label-text text-lg">Video Preview</span>
             </label>
             <ReactPlayer
               url={preview.video}
@@ -112,7 +112,7 @@ export default function Watermark() {
           <div className="form-control mt-4">
             <label>Choose your type of watermark</label>
             <select
-              className="select select-bordered w-full max-w-xs"
+              className="select select-bordered w-full"
               onChange={handleChange}
             >
               <option>Image</option>
@@ -121,13 +121,13 @@ export default function Watermark() {
           </div>
           <div className="form-control mt-4">
             <label className="label">
-              <span className="label-text capitalize">
+              <span className="label-text text-lg capitalize">
                 Watermark {watermark}
               </span>
             </label>
             <input
               type="file"
-              className="file-input h-8 file-input-bordered w-full max-w-xs"
+              className="file-input h-8 file-input-bordered md:h-12 w-full"
               accept={`${watermark}/*`}
               name="watermark"
               onChange={handleFileChange}
@@ -136,7 +136,7 @@ export default function Watermark() {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text capitalize">{watermark} Preview</span>
+              <span className="label-text capitalize text-lg">{watermark} Preview</span>
             </label>
             {watermark === "image" ? (
               <img src={preview.watermark} width="100%" height="100%" />

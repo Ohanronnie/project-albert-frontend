@@ -47,10 +47,10 @@ console.log(error);
   };
   return (
     <>
-      <div className="herro min-h-screen min-w-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="herro flex items-center justify-center min-h-screen min-w-screen bg-base-200">
+        <div className="hero-content w-full flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
-            <h1 className="text-3xl font-bold">Login</h1>
+            <h1 className="text-3xl font-bold">Login to your account </h1>
             <p className="py-1"></p>
           </div>
           <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -90,7 +90,7 @@ console.log(error);
               <div className="form-control mt-6">
                 {!loading ? (
                   <button type="submit" className="btn btn-block rounded-full">
-                    Sign In
+                    login
                   </button>
                 ) : (
                   <button className="btn rounded-full btn-block">
