@@ -23,11 +23,11 @@ export default function Register() {
         navigate("/home");
       })
       .catch((error) => {
-console.log(error);
+        console.log(error);
         let response = error?.response?.data?.message
           .toLowerCase()
           .replaceAll('"', "");
-//        console.log(response);
+        //        console.log(response);
         response = response.replace(response[0], response[0].toUpperCase());
         if (response.match(/email/i)) {
           setErrors((val) => ({ ...val, email: response }));

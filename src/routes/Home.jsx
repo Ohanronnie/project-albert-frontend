@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { axios } from "../utils/axios.js";
 import { useState, useEffect } from "react";
-import Vector from '../assets/youtube-4740743_1280.jpg'
+import Vector from "../assets/youtube-4740743_1280.jpg";
 const NeedPayment = () => {
   return (
     <>
@@ -31,10 +31,7 @@ const ProductCard = ({ title, body, badge, path }) => {
   return (
     <div className="card w-full border-solid border-[1px] card-compact mb-4 bg-base-200 shadow-xl">
       <figure>
-        <img
-          src={Vector}
-          alt=""
-        />
+        <img src={Vector} alt="" />
       </figure>
       <div className="card-body bg-base-200">
         <h2 className="card-title text-sm my-0 uppercase">
@@ -64,7 +61,7 @@ const Paid = () => {
             badge="NEW"
             path="watermark"
           />
-{/*          <ProductCard
+          {/*          <ProductCard
             title="Content Manager"
             body="Help you manage your social media with AI"
             badge="Coming Soon"
@@ -89,11 +86,16 @@ export default function Home() {
       .post("/user")
       .then((response) => {
         const data = response.data;
-        if (data.payment_required && !data.free_trial_days) {
+        if (data.paymentRequired) {
+          setHasPaid(false);
+        } else {
+          setHasPaid(true);
+        }
+        /*        if (data.payment_required && !data.free_trial_days) {
           setHasPaid(false);
         } else if (!data.payment_required) {
           setHasPaid(true);
-        }
+        }*/
       })
       .catch((error) => {
         setHasPaid(false);

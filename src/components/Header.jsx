@@ -1,5 +1,4 @@
-
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 export default function Header({ landing }) {
   const navigate = useNavigate();
 
@@ -26,8 +25,9 @@ export default function Header({ landing }) {
             </div>
             <ul
               tabIndex={0}
-              className={`menu menu-sm hidden ${true && "hidden"
-                } dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52`}
+              className={`menu menu-sm hidden ${
+                true && "hidden"
+              } dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52`}
             >
               <li>
                 <a>Item 1</a>
@@ -75,7 +75,10 @@ export default function Header({ landing }) {
         </div>
         <div className="navbar-end">
           {landing && (
-            <button onClick={() => navigate('/register')} className="btn text-white bg-[#008FFF] outline-none border-none">
+            <button
+              onClick={() => navigate("/register")}
+              className="btn text-white bg-[#008FFF] outline-none border-none"
+            >
               Sign Up For Free
             </button>
           )}
