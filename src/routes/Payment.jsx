@@ -11,9 +11,9 @@ export default function Payment() {
       .post("/user")
       .then((response) => {
         const data = response.data;
-        if (data.payment_required) {
+        if (data.paymentRequired) {
           setHasPaid(false);
-        } else if (!data.payment_required) {
+        } else if (!data.paymentRequired) {
           setHasPaid(true);
           navigate("/home");
         }
