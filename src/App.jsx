@@ -13,6 +13,7 @@ import Watermark from "./routes/Watermark";
 import Payment from "./routes/Payment";
 import { axios } from "./utils/axios.js";
 import { useState, useEffect } from "react";
+import VideoPage from "./routes/Video.jsx";
 const PrivateRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isValid, setIsValid] = useState(false);
@@ -37,15 +38,14 @@ const PrivateRoute = () => {
 const PaidRoute = () => {
   const [hasPaid, setHasPaid] = useState(false);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
   useEffect(() => {
     axios
       .post("/user")
       .then((response) => {
         const data = response.data;
-        if (data.payment_required && !data.free_trial_days) {
+        if (data.paymentRequired) {
           setHasPaid(false);
-        } else if (!data.payment_required) {
+        } else if (!data.paymentRequired) {
           setHasPaid(true);
         }
       })
@@ -72,6 +72,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: '/video/:id',
+      element: <VideoPage />
     },
     {
       path: "/home",

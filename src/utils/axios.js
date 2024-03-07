@@ -5,7 +5,7 @@ export const axios = _axios.create({
   timeout: 1000 * 60 * 60 * 24,
 });
 axios.interceptors.request.use(
-  async (config, ...rest) => {
+  async (config) => {
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${localStorage.getItem("X-AUTH-TOKEN")}`,

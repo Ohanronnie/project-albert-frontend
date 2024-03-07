@@ -1,107 +1,124 @@
-import Header from "../components/Header";
-import { useState, useEffect, useRef } from "react";
-import { axios } from "../utils/axios.js";
-import ReactPlayer from "react-player";
-import { PauseIcon, PlayIcon } from "@heroicons/react/24/outline";
-const VideoPlayer = ({ src }) => {
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const response = await axios.get(src, {
-          responseType: "blob",
-          headers: { Range: "bytes=0-" }, // Requesting the full file initially
-        });
-
-        const videoBlob = new Blob([response.data], { type: "video/mp4" });
-        const videoURL = URL.createObjectURL(videoBlob);
-        if (videoRef.current) {
-          videoRef.current.src = videoURL;
-        }
-      } catch (error) {
-        console.error("Error fetching video:", error);
-      }
-    };
-
-    fetchVideo();
-  }, [src]);
-
-  return <video ref={videoRef} controls width="100%" height="100%" />;
-};
+import Header from "../components/Header"
+import { useState, useEffect, useRef } from "react"
+import { axios } from "../utils/axios.js"
+import ReactPlayer from "react-player"
+import { ClipboardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/outline"
+import { Link } from "react-router-dom"
 
 export default function Watermark() {
-  const [watermark, setWatermark] = useState("image");
-  const [insertVideo, setInsertVideo] = useState(null);
-  const [details, setDetails] = useState({});
-  const [preview, setPreview] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [isDone, setIsDone] = useState(false);
-  const [output, setOutput] = useState(null);
-  const [totalTime, setTotalTime] = useState(0);
-  const [currentTime, setCurrentTime] = useState({ s: 0, m: 0, total:0});
+  const [watermark, setWatermark] = useState("image")
+  const [insertVideo, setInsertVideo] = useState(null)
+  const [details, setDetails] = useState({})
+  const [preview, setPreview] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+  const [isDone, setIsDone] = useState(false)
+  const [output, setOutput] = useState(null)
+  const [totalTime, setTotalTime] = useState(0)
+  const [currentTime, setCurrentTime] = useState({ s: 0, m: 0, total: 0 })
+  const [checkedRef, setChecked] = useState(false);
+  const [savedVideosSrc, setSavedVideosSrc] = useState([]);
+  const [videoId, setVideoId] = useState(null)
   const videoAdvancedRef = useRef(null);
-  const [checkedRef,setChecked] = useState(false);
+  const [username, setUsername] = useState(null)
   const handleChange = (e) => setWatermark(e.target.value.toLowerCase());
+  useEffect(function () {
+   
+    axios.post('/product/saved/clips').then(({ data: { clips } }) => {
+      setSavedVideosSrc(clips.map((clip, index) => ({ id: index, src: clip.url, clicked: false, playing: false})))
+    })
+  },[])
   const handleFileChange = (e) => {
     const name = e.target.name;
     const file = e.target.files[0];
-    setDetails((curr) => ({ ...curr, [name]: file }));
-    setPreview((curr) => ({ ...curr, [name]: URL.createObjectURL(file) }));
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setIsDone(false);
-    const formData = new FormData();
-    formData.append("video", details.video);
-    formData.append("watermark", details.watermark);
+    if (!file) return;
+    setDetails((curr) => ({ ...curr, [name]: file }))
+    setPreview((curr) => ({ ...curr, [name]: URL.createObjectURL(file) }))
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setIsDone(false)
+    const formData = new FormData()
+    formData.append("video", details.video)
+    formData.append("watermark", details.watermark)
     formData.append("type", watermark);
-    if(checkedRef && insertVideo){
-      formData.append('insertVideo', insertVideo);
-      formData.append('insertTime', currentTime.total)
+    formData.append('username', username)
+    if (checkedRef && insertVideo) {
+      formData.append("insertTime", currentTime.total);
+      if (typeof insertVideo === 'string') {
+        console.log(insertVideo)
+        formData.append('insertVideo', insertVideo)
+      } else {
+        const insertFormData = new FormData();
+        insertFormData.append('video', insertVideo);
+        const response = await axios.post('/upload/insert-video');
+        formData.append('insertVideo', response.data.path)
+      }
     }
     axios
       .post("/product/watermark", formData)
       .then((res) => {
-        setOutput(import.meta.env.VITE_BACKEND_URL + "/video?path=" + res.data.path);
-        setIsDone(true);
+        setOutput(res.data.url);
+        setVideoId(res.data.id)
+        setIsDone(true)
       })
-      .finally(() => setIsLoading(false));
-  };
+      .finally(() => setIsLoading(false))
+  }
+  const saveVideo = async () => {
+    const formData = new FormData();
+    formData.append('video', insertVideo);
+    const path = await axios.post('/upload/insert-video', formData);
+    console.log(path);
+    const saveClip = await axios.post('/product/save-clip', path.data);
+    console.log(saveClip)
+  }
   const handleDownload = async (src) => {
-    const element = document.createElement("a");
-    element.setAttribute("download", Date.now().toString(32) + ".mp4");
+    const element = document.createElement("a")
+    element.setAttribute("download", Date.now().toString(32) + ".mp4")
     try {
-      const response = await axios.get(src, {
-        responseType: "blob",
-        headers: { Range: "bytes=0-" }, // Requesting the full file initially
-      });
-      const videoBlob = new Blob([response.data], { type: "video/mp4" });
-      const videoURL = URL.createObjectURL(videoBlob);
-      element.setAttribute("href", output);
-      document.body.appendChild(element);
-      element.click();
-      element.remove();
+   element.setAttribute("href", output)
+      document.body.appendChild(element)
+      element.click()
+      element.remove()
     } catch (err) {
-      console.error(err);
+      (console).error(err)
     }
-  };
+  }
   const handleProgress = (evt) => {
-    const event = evt.target;
-    const currentTime = event.currentTime;
-    const duration = event.duration;
-    setTotalTime(duration);
+    const event = evt.target
+    const currentTime = event.currentTime
+    const duration = event.duration
+    setTotalTime(duration)
     setCurrentTime(
       currentTime < 60
         ? { m: 0, s: currentTime, total: currentTime }
-        : { s: currentTime % 60, m: currentTime / 60, total: currentTime },
-    );
-  };
-  const addLeadingZero = (num) => {
-    return num <= 9 ? '0' + num : num
+        : { s: currentTime % 60, m: currentTime / 60, total: currentTime }
+    )
   }
-
+  const addLeadingZero = (num) => {
+    return num <= 9 ? "0" + num : num
+  }
+  const SavedVideos = ({ src, _key, isClicked }) => {
+    return (
+      <>
+        <div onClick={(e) => setSavedVideosSrc(value => {
+          let VALUES = [...value];
+          VALUES.forEach(val => { val.clicked = false; })
+          let pos = (VALUES.findIndex(val => {
+            return val.id == _key
+          }));
+          VALUES[pos].clicked = true
+          return VALUES
+        })}
+          className={`m-2 w-full h-64 p-1 border-solid  border-blue-500 ${
+            isClicked && "border-2"
+          }`}
+        >
+          <video onClick={(e) => setInsertVideo(e.target.src)} className="w-full h-full" key={_key} src={src} controls></video>
+        </div>
+      </>
+    )
+  }
   return (
     <>
       <nav>
@@ -176,6 +193,14 @@ export default function Watermark() {
               />
             )}
           </div>
+          <div className="form-control my-2">
+            <label className="label">
+              <span className="label-text text-lg capitalize">
+                Username
+              </span>
+            </label>
+            <input type="text" className="input input-bordered" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+          </div>
           <div className="">
             {preview.video && (
               <>
@@ -223,36 +248,63 @@ export default function Watermark() {
                     </div>
                   </div>
                 </div>
+                <div className="mt-6">
+                  <div className="flex justify-between ">
+                    <h2 className="flex">
+                      Insert a video here
+                      <p className="ml-2">
+                        <span className="">
+                          {addLeadingZero(Math.round(currentTime.m))}
+                        </span>
+                        :
+                        <span>{addLeadingZero(Math.round(currentTime.s))}</span>
+                      </p>
+                    </h2>
+                    <input
+                      type="checkbox"
+                      className="toggle"
+                      onChange={(e) => setChecked(e.target.checked)}
+                    />
+                  </div>
+                  <div className="mt-4">
+                    {checkedRef && (
+                      <>
+                        <div className="flex justify-between">
+                          <input
+                            type="file"
+                            accept="video/*"
+                            className="file-input h-10"
+                            onChange={(e) => setInsertVideo(e.target.files[0])}
+                          />
+                          <button
+                            className="btn"
+                            type="button"
+                            onClick={saveVideo}
+                          >
+                            Save
+                          </button>
+                        </div>
+                        <div className="mt-4">
+                          <h2 className="uppercase text-center font-medium">
+                            Saved Videos
+                          </h2>
+                          <h2>Choose one</h2>
+                          <div className="flex flex-wrap w-full ">
+                            {savedVideosSrc.map((value, index) => (
+                              <SavedVideos
+                                src={value.src}
+                                _key={value.id}
+                                isClicked={value.clicked}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
               </>
             )}
-            <div className="mt-6">
-              <div className="flex justify-between ">
-                <h2 className="flex">
-                  Insert a video here
-                  <p className="ml-2">
-                    <span className="">
-                      {addLeadingZero(Math.round(currentTime.m))}
-                    </span>
-                    :<span>{addLeadingZero(Math.round(currentTime.s))}</span>
-                  </p>
-                </h2>
-                <input
-                  type="checkbox"
-                  className="toggle"
-                  onChange={(e) => setChecked(e.target.checked)}
-                />
-              </div>
-              <div className="mt-4">
-                {checkedRef && (
-                  <input
-                    type="file"
-                    accept="video/*"
-                    className="file-input h-10"
-                    onChange={(e) => setInsertVideo(e.target.files[0])}
-                  />
-                )}
-              </div>
-            </div>
           </div>
           <button type="submit" className="mt-4 btn btn-block">
             {!isLoading ? (
@@ -265,18 +317,40 @@ export default function Watermark() {
             )}
           </button>
         </form>
+
         {isDone && (
           <div className="form-control">
             <label className="label">
               <span className="label-text">Output</span>
             </label>
-            <video src={output} controls/>
+            <video src={output} controls />
             <button
               className="btn btn-block mt-2"
               onClick={handleDownload.bind({}, output)}
             >
               Download
             </button>
+            <div className="flex mt-2 items-center">
+              Video Link -{">"}
+              <Link
+                to={`/video/${videoId}`}
+                className="underline mx-2"
+                target="_blank"
+              >
+                {window.location.origin + `/video/${videoId}`}
+              </Link>
+              <ClipboardIcon
+                className="w-4 h-4"
+                onClick={(event) => {
+                  const copyEle = document.createElement("input")
+                  document.body.appendChild(copyEle)
+                  copyEle.value = window.location.origin + `/video/${videoId}`
+                  copyEle.select()
+                  document.execCommand("copy")
+                  copyEle.remove()
+                }}
+              />
+            </div>
           </div>
         )}
       </section>
