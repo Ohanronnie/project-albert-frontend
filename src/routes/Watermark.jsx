@@ -1,7 +1,6 @@
 import Header from "../components/Header"
 import { useState, useEffect, useRef } from "react"
 import { axios } from "../utils/axios.js"
-import ReactPlayer from "react-player"
 import { ClipboardIcon, PauseIcon, PlayIcon } from "@heroicons/react/24/outline"
 import { Link } from "react-router-dom"
 
@@ -144,8 +143,8 @@ export default function Watermark() {
             <label className="label">
               <span className="label-text text-lg">Video Preview</span>
             </label>
-            <ReactPlayer
-              url={preview.video}
+            <video
+              src={preview.video}
               width="100%"
               height="100%"
               controls
@@ -185,8 +184,8 @@ export default function Watermark() {
             {watermark === "image" ? (
               <img src={preview.watermark} width="100%" height="100%" />
             ) : (
-              <ReactPlayer
-                url={preview.watermark}
+              <video
+                src={preview.watermark}
                 width="100%"
                 height="100%"
                 controls
