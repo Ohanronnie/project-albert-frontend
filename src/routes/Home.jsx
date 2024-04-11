@@ -1,8 +1,8 @@
-import Header from "../components/Header";
-import { Link } from "react-router-dom";
-import { axios } from "../utils/axios.js";
-import { useState, useEffect } from "react";
-import Vector from "../assets/youtube-4740743_1280.jpg";
+import Header from "../components/Header"
+import { Link } from "react-router-dom"
+import { axios } from "../utils/axios.js"
+import { useState, useEffect } from "react"
+import Vector from "../assets/youtube-4740743_1280.jpg"
 const NeedPayment = () => {
   return (
     <>
@@ -25,8 +25,8 @@ const NeedPayment = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 const ProductCard = ({ title, body, badge, path }) => {
   return (
     <div className="card w-full border-solid border-[1px] card-compact mb-4 bg-base-200 shadow-xl">
@@ -47,8 +47,8 @@ const ProductCard = ({ title, body, badge, path }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 const Paid = () => {
   return (
     <>
@@ -61,11 +61,13 @@ const Paid = () => {
             badge="NEW"
             path="watermark"
           />
-          {/*          <ProductCard
+          <ProductCard
             title="Content Manager"
-            body="Help you manage your social media with AI"
-            badge="Coming Soon"
+            body="Help you manage your Facebook page with AI"
+            badge="NEW"
+            path="content/manage"
           />
+          {/*
           <ProductCard
             title="Content Scheduling"
             body="Schedule post to social media"
@@ -74,22 +76,22 @@ const Paid = () => {
         </div>
       </main>
     </>
-  );
-};
+  )
+}
 
 export default function Home() {
-  const [hasPaid, setHasPaid] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [daysRemain, setDaysRemain] = useState(0);
+  const [hasPaid, setHasPaid] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [daysRemain, setDaysRemain] = useState(0)
   useEffect(() => {
     axios
       .post("/user")
       .then((response) => {
-        const data = response.data;
+        const data = response.data
         if (data.paymentRequired) {
-          setHasPaid(false);
+          setHasPaid(false)
         } else {
-          setHasPaid(true);
+          setHasPaid(true)
         }
         /*        if (data.payment_required && !data.free_trial_days) {
           setHasPaid(false);
@@ -98,19 +100,19 @@ export default function Home() {
         }*/
       })
       .catch((error) => {
-        setHasPaid(false);
+        setHasPaid(false)
       })
-      .finally((e) => setLoading(false));
-  }, []);
+      .finally((e) => setLoading(false))
+  }, [])
   return (
     <>
       <nav>
         <Header />
       </nav>
       <section className="bg-base-100">
-        {!loading && !hasPaid && <NeedPayment />}
-        {!loading && hasPaid && <Paid />}
+        {/*!loading && !hasPaid &&<NeedPayment />*/}
+        {/*!loading && hasPaid && */ <Paid />}
       </section>
     </>
-  );
+  )
 }

@@ -1,50 +1,50 @@
-import { Link, useNavigate } from "react-router-dom";
-import { axios } from "../utils/axios.js";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"
+import { axios } from "../utils/axios.js"
+import { useState } from "react"
 export default function Register() {
   const [details, setDetails] = useState({
     email: "",
     password: "",
-  });
+  })
   const [errors, setErrors] = useState({
     email: null,
     password: null,
-  });
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  })
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     axios
       .post("/user/login", details)
       .then((data) => {
-        setErrors({});
-        localStorage.setItem("X-AUTH-TOKEN", data.data.token);
-        navigate("/home");
+        setErrors({})
+        localStorage.setItem("X-AUTH-TOKEN", data.data.token)
+        navigate("/home")
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error)
         let response = error?.response?.data?.message
           .toLowerCase()
-          .replaceAll('"', "");
+          .replaceAll('"', "")
         //        console.log(response);
-        response = response.replace(response[0], response[0].toUpperCase());
+        response = response.replace(response[0], response[0].toUpperCase())
         if (response.match(/email/i)) {
-          setErrors((val) => ({ ...val, email: response }));
+          setErrors((val) => ({ ...val, email: response }))
         } else {
-          setErrors((val) => ({ ...val, email: null }));
+          setErrors((val) => ({ ...val, email: null }))
         }
         if (response.match(/password/i)) {
-          setErrors((val) => ({ ...val, password: response }));
+          setErrors((val) => ({ ...val, password: response }))
         } else {
-          setErrors((val) => ({ ...val, password: null }));
+          setErrors((val) => ({ ...val, password: null }))
         }
       })
-      .finally(() => setLoading(false));
-  };
+      .finally(() => setLoading(false))
+  }
   const handleClick = (e) => {
-    setDetails((val) => ({ ...val, [e.target.name]: e.target.value }));
-  };
+    setDetails((val) => ({ ...val, [e.target.name]: e.target.value }))
+  }
   return (
     <>
       <div className="herro flex items-center justify-center min-h-screen min-w-screen bg-base-200">
@@ -112,5 +112,5 @@ export default function Register() {
         </div>
       </div>
     </>
-  );
+  )
 }

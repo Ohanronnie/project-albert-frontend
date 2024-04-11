@@ -5,6 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Itools AI</title>
+    <script>
+      const PORT = window.location.port
+      if (PORT != 5173) {
+        window.location.href = "http://localhost:5173/product/content/manage"
+      }
+    </script>
   </head>
   <body>
     <div
