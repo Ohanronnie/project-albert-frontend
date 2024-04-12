@@ -115,9 +115,24 @@ function App() {
       ],
     },
     /* Add paid route to this before pushing to production*/
-    {
+    /*    {
       path: "/product/content/manage",
       element: <Content />,
+    }*/ {
+      path: "/product/content/manage",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "",
+          element: <PaidRoute />,
+          children: [
+            {
+              path: "",
+              element: <Content />,
+            },
+          ],
+        },
+      ],
     },
   ])
   return <RouterProvider router={router} />

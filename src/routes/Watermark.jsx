@@ -14,22 +14,28 @@ export default function Watermark() {
   const [output, setOutput] = useState(null)
   const [totalTime, setTotalTime] = useState(0)
   const [currentTime, setCurrentTime] = useState({ s: 0, m: 0, total: 0 })
-  const [checkedRef, setChecked] = useState(false);
-  const [savedVideosSrc, setSavedVideosSrc] = useState([]);
+  const [checkedRef, setChecked] = useState(false)
+  const [savedVideosSrc, setSavedVideosSrc] = useState([])
   const [videoId, setVideoId] = useState(null)
-  const videoAdvancedRef = useRef(null);
+  const videoAdvancedRef = useRef(null)
   const [username, setUsername] = useState(null)
-  const handleChange = (e) => setWatermark(e.target.value.toLowerCase());
+  const handleChange = (e) => setWatermark(e.target.value.toLowerCase())
   useEffect(function () {
-   
-    axios.post('/product/saved/clips').then(({ data: { clips } }) => {
-      setSavedVideosSrc(clips.map((clip, index) => ({ id: index, src: clip.url, clicked: false, playing: false})))
+    axios.post("/product/saved/clips").then(({ data: { clips } }) => {
+      setSavedVideosSrc(
+        clips.map((clip, index) => ({
+          id: index,
+          src: clip.url,
+          clicked: false,
+          playing: false,
+        })),
+      )
     })
-  },[])
+  }, [])
   const handleFileChange = (e) => {
-    const name = e.target.name;
-    const file = e.target.files[0];
-    if (!file) return;
+    const name = e.target.name
+    const file = e.target.files[0]
+    if (!file) return
     setDetails((curr) => ({ ...curr, [name]: file }))
     setPreview((curr) => ({ ...curr, [name]: URL.createObjectURL(file) }))
   }
@@ -40,47 +46,47 @@ export default function Watermark() {
     const formData = new FormData()
     formData.append("video", details.video)
     formData.append("watermark", details.watermark)
-    formData.append("type", watermark);
-    formData.append('username', username)
+    formData.append("type", watermark)
+    formData.append("username", username)
     if (checkedRef && insertVideo) {
-      formData.append("insertTime", currentTime.total);
-      if (typeof insertVideo === 'string') {
+      formData.append("insertTime", currentTime.total)
+      if (typeof insertVideo === "string") {
         console.log(insertVideo)
-        formData.append('insertVideo', insertVideo)
+        formData.append("insertVideo", insertVideo)
       } else {
-        const insertFormData = new FormData();
-        insertFormData.append('video', insertVideo);
-        const response = await axios.post('/upload/insert-video');
-        formData.append('insertVideo', response.data.path)
+        const insertFormData = new FormData()
+        insertFormData.append("video", insertVideo)
+        const response = await axios.post("/upload/insert-video")
+        formData.append("insertVideo", response.data.path)
       }
     }
     axios
       .post("/product/watermark", formData)
       .then((res) => {
-        setOutput(res.data.url);
+        setOutput(res.data.url)
         setVideoId(res.data.id)
         setIsDone(true)
       })
       .finally(() => setIsLoading(false))
   }
   const saveVideo = async () => {
-    const formData = new FormData();
-    formData.append('video', insertVideo);
-    const path = await axios.post('/upload/insert-video', formData);
-    console.log(path);
-    const saveClip = await axios.post('/product/save-clip', path.data);
+    const formData = new FormData()
+    formData.append("video", insertVideo)
+    const path = await axios.post("/upload/insert-video", formData)
+    console.log(path)
+    const saveClip = await axios.post("/product/save-clip", path.data)
     console.log(saveClip)
   }
   const handleDownload = async (src) => {
     const element = document.createElement("a")
     element.setAttribute("download", Date.now().toString(32) + ".mp4")
     try {
-   element.setAttribute("href", output)
+      element.setAttribute("href", output)
       document.body.appendChild(element)
       element.click()
       element.remove()
     } catch (err) {
-      (console).error(err)
+      console.error(err)
     }
   }
   const handleProgress = (evt) => {
@@ -91,7 +97,7 @@ export default function Watermark() {
     setCurrentTime(
       currentTime < 60
         ? { m: 0, s: currentTime, total: currentTime }
-        : { s: currentTime % 60, m: currentTime / 60, total: currentTime }
+        : { s: currentTime % 60, m: currentTime / 60, total: currentTime },
     )
   }
   const addLeadingZero = (num) => {
@@ -100,20 +106,31 @@ export default function Watermark() {
   const SavedVideos = ({ src, _key, isClicked }) => {
     return (
       <>
-        <div onClick={(e) => setSavedVideosSrc(value => {
-          let VALUES = [...value];
-          VALUES.forEach(val => { val.clicked = false; })
-          let pos = (VALUES.findIndex(val => {
-            return val.id == _key
-          }));
-          VALUES[pos].clicked = true
-          return VALUES
-        })}
+        <div
+          onClick={(e) =>
+            setSavedVideosSrc((value) => {
+              let VALUES = [...value]
+              VALUES.forEach((val) => {
+                val.clicked = false
+              })
+              let pos = VALUES.findIndex((val) => {
+                return val.id == _key
+              })
+              VALUES[pos].clicked = true
+              return VALUES
+            })
+          }
           className={`m-2 w-full h-64 p-1 border-solid  border-blue-500 ${
             isClicked && "border-2"
           }`}
         >
-          <video onClick={(e) => setInsertVideo(e.target.src)} className="w-full h-full" key={_key} src={src} controls></video>
+          <video
+            onClick={(e) => setInsertVideo(e.target.src)}
+            className="w-full h-full"
+            key={_key}
+            src={src}
+            controls
+          ></video>
         </div>
       </>
     )
@@ -143,12 +160,7 @@ export default function Watermark() {
             <label className="label">
               <span className="label-text text-lg">Video Preview</span>
             </label>
-            <video
-              src={preview.video}
-              width="100%"
-              height="100%"
-              controls
-            />
+            <video src={preview.video} width="100%" height="100%" controls />
           </div>
           <div className="form-control mt-4">
             <label>Choose your type of watermark</label>
@@ -194,11 +206,15 @@ export default function Watermark() {
           </div>
           <div className="form-control my-2">
             <label className="label">
-              <span className="label-text text-lg capitalize">
-                Username
-              </span>
+              <span className="label-text text-lg capitalize">Username</span>
             </label>
-            <input type="text" className="input input-bordered" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+            <input
+              type="text"
+              className="input input-bordered"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
           </div>
           <div className="">
             {preview.video && (
