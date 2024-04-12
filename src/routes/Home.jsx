@@ -110,8 +110,8 @@ export default function Home() {
         <Header />
       </nav>
       <section className="bg-base-100">
-        {/*!loading && !hasPaid &&<NeedPayment />*/}
-        {/*!loading && hasPaid && */ <Paid />}
+        {!loading && !hasPaid && <NeedPayment />}
+        {!loading && hasPaid && <Paid />}
       </section>
     </>
   )
