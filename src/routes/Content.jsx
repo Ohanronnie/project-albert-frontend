@@ -184,7 +184,7 @@ export default function Content() {
       .get("/product/facebook/getpage")
       .then((response) => {
         if (response.data.length == 0) {
-          setPages([])
+          setPages(null)
         } else {
           setPages(response.data)
         }
