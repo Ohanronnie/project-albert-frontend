@@ -11,10 +11,11 @@ import Login from "./routes/Login"
 import Home from "./routes/Home"
 import Watermark from "./routes/Watermark"
 import Payment from "./routes/Payment"
-import Content from "./routes/Content"
+import Content, { AccountList } from "./routes/Content"
 import { axios } from "./utils/axios.js"
 import { useState, useEffect } from "react"
 import VideoPage from "./routes/Video.jsx"
+import TwitterCallback from "./routes/twitter.jsx"
 const PrivateRoute = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isValid, setIsValid] = useState(false)
@@ -75,6 +76,10 @@ function App() {
       element: <Login />,
     },
     {
+path: '/auth/twitter/callback',
+element: <TwitterCallback/>
+    },
+    {
       path: "/video/:id",
       element: <VideoPage />,
     },
@@ -129,6 +134,22 @@ function App() {
             {
               path: "",
               element: <Content />,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      path: "/product/twitter/list",
+      element: <PrivateRoute />,
+      children: [
+        {
+          path: "",
+          element: <PaidRoute />,
+          children: [
+            {
+              path: "",
+              element: <AccountList />,
             },
           ],
         },
