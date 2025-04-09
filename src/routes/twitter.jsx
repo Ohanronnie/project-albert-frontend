@@ -10,16 +10,17 @@ const TwitterCallback = () => {
   const hasRun = useRef(false);
   useEffect(() => {
     const authenticateUser = async () => {
-      const code = searchParams.get("code");
-      const state = searchParams.get("state");
-      if (!code || !state) {
+      console.log(window.location.href)
+      const oauth_token  = searchParams.get("oauth_token");
+      const oauth_verifier = searchParams.get("oauth_verifier");
+      if (!oauth_token || !oauth_verifier) {
         setError("Invalid or missing authentication details.");
         setLoading(false);
         return;
       }
       try {
         // Send code to backend
-        const response = await axios.post("/product/auth/twitter/callback", { code, state });
+        const response = await axios.post("/product/auth/twitter/callback", { oauth_token, oauth_verifier });
         setUser(response.data); // Store user data
       } catch (err) {
         setError(err.response?.data || "Authentication failed.");

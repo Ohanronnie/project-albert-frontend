@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { axios } from "../utils/axios.js";
 import { useState } from "react";
+console.log(88, import.meta.env["VITE_BACKEND_URL"], null, 2233);
 export default function Register() {
   const [details, setDetails] = useState({
     email: "",

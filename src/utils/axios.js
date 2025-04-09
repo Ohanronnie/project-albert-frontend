@@ -1,4 +1,6 @@
 import _axios from "axios";
+
+console.log(88,import.meta.env["VITE_BACKEND_URL"], null, 2233);
 export const axios = _axios.create({
   baseURL: import.meta.env["VITE_BACKEND_URL"],
   withCredentials: true,
@@ -16,3 +18,4 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   },
 );
+console.log(import.meta.env["VITE_BACKEND_URL"]);
